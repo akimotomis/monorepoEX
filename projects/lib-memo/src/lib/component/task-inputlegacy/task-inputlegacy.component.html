@@ -1,0 +1,22 @@
+<p>task-inputlegacy works!</p>
+<mat-form-field class="input-form-field" appearance="fill">
+  <mat-label>
+    <mat-icon class="input-iconcolor">favorite</mat-icon>Title Input
+  </mat-label>
+  <input
+    matInput
+    type="text"
+    [ngModel]="inText"
+    (ngModelChange)="input($event); inText = $event"
+    (keyup)="keyUp($event)"
+  />
+  <button
+    mat-raised-button
+    color="warn"
+    matSuffix
+    [disabled]="isButtonDisabled"
+    (click)="click()"
+  >
+    追加
+  </button>
+</mat-form-field>

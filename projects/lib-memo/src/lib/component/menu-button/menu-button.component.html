@@ -1,0 +1,35 @@
+<mat-toolbar color="primary" class="mat-elevation-z24">
+  <button mat-mini-fab color="primary" [matMenuTriggerFor]="mainMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-divider></mat-divider>
+  <a [routerLink]="['/']" style="text-decoration: none">
+    <h1>My Memo</h1>
+  </a>
+  <span class="spacer"></span>
+  <mat-divider></mat-divider>
+  <button mat-mini-fab color="primary" [matMenuTriggerFor]="supportMenu">
+    <mat-icon>share</mat-icon>
+  </button>
+  <mat-divider></mat-divider>
+  <mat-menu #mainMenu="matMenu">
+    <ng-container *ngFor="let item of mainMenuList">
+      <button mat-menu-item [routerLink]="[item.link]">
+        <mat-icon class="menu-iconcolor">{{ item.icon }}</mat-icon>
+        <span>{{ item.name }}</span>
+      </button>
+    </ng-container>
+  </mat-menu>
+  <mat-menu #supportMenu="matMenu">
+    <ng-container *ngFor="let item of supportMenuList">
+      <button
+        mat-menu-item
+        [disabled]="[item.disabled]"
+        (click)="supportMethod(item.name)"
+      >
+        <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
+        <span [style.color]="item.color">{{ item.name }}</span>
+      </button>
+    </ng-container>
+  </mat-menu>
+</mat-toolbar>

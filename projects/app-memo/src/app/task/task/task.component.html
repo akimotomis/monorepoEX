@@ -1,0 +1,9 @@
+<p>task works!</p>
+<div>
+  <lib-task-input
+    (change)="validateInput($event)"
+    (add)="add($event)"
+    [isButtonDisabled]="isButtonDisabled"
+  ></lib-task-input>
+</div>
+<lib-task-list></lib-task-list>

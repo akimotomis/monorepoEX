@@ -1,0 +1,15 @@
+<p>taskdetail works!</p>
+<div (contextmenu)="menuMethod($event); (false)">
+  <lib-menu-context
+    style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    (save)="save()"
+    (cancel)="cancel()"
+  >
+  </lib-menu-context>
+  <lib-task-form></lib-task-form>
+</div>
+<!-- <div
+  [matMenuTriggerFor]="menu"
+></div> -->

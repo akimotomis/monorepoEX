@@ -1,0 +1,8 @@
+.details-container {
+  display: flex;
+  flex-direction: column;
+}
+.details-container > * {
+  width: 100%;
+  margin-right: 12px;
+}

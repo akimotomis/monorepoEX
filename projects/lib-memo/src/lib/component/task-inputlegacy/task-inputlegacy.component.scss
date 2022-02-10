@@ -1,0 +1,12 @@
+.input-iconcolor {
+  color: fuchsia;
+}
+.input-form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 12%;
+}
+.input-form-field input {
+  flex: 1 1 auto;
+}

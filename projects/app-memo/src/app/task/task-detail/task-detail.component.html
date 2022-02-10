@@ -1,0 +1,23 @@
+<form [formGroup]="editForm" (ngSubmit)="onSave(editForm.value)">
+  <button class="button" type="reset" (click)="goBack()">back</button>
+  <button class="button" type="submit">SAVE</button>
+  <div class="details-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Content</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        placeholder="Content"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="25"
+      >
+      </textarea>
+    </mat-form-field>
+  </div>
+</form>

@@ -1,0 +1,19 @@
+<!-- <p>menu-context works!</p> -->
+<!-- <div (contextmenu)="menuMethod($event)">
+  {{ 'test' }}
+</div> -->
+<div [matMenuTriggerFor]="menu"></div>
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent>
+    <ng-container *ngFor="let item of saveMenuList">
+      <button
+        mat-menu-item
+        [disabled]="[item.disabled]"
+        (click)="saveMethod(item.id)"
+      >
+        <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
+        <span [style.color]="item.color">{{ item.name }}</span>
+      </button>
+    </ng-container>
+  </ng-template>
+</mat-menu>

@@ -1,0 +1,20 @@
+<mat-form-field class="input-form-field" appearance="fill">
+  <mat-label>
+    <mat-icon [style.color]="styleColor">favorite</mat-icon>Title Input
+  </mat-label>
+  <input
+    matInput
+    type="text"
+    [formControl]="inTextfmc"
+    (keyup)="keyUp($event)"
+  />
+  <button
+    mat-raised-button
+    matSuffix
+    color="primary"
+    [disabled]="isButtonDisabled"
+    (click)="click()"
+  >
+    追加
+  </button>
+</mat-form-field>

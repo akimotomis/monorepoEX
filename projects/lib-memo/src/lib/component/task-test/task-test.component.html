@@ -1,0 +1,10 @@
+<p>task-test works!</p>
+<h3>{{ editName }}</h3>
+<mat-form-field class="input-form-field" appearance="fill">
+  <input matInput type="text" [(ngModel)]="value" />
+</mat-form-field>
+
+<div>
+  <button (click)="save()">Save</button>
+  <button (click)="cancel()">Cancel</button>
+</div>

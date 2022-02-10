@@ -1,0 +1,4 @@
+# Add files here to ignore them from prettier formatting
+projects/app-memo/src/app/task/task-list/task-list.component.html
+/dist
+/coverage

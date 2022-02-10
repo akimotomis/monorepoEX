@@ -1,0 +1,15 @@
+.full-width-table {
+  width: 100%;
+}
+tr.element-row:nth-child(even) {
+  background: rgba(83, 42, 124, 0.048);
+}
+tr.element-row:hover {
+  background: #7efafa;
+}
+tr.header-row {
+  background: #97e5f8;
+}
+tr.selectedrow {
+  background: hsl(332, 93%, 74%);
+}
