@@ -46,6 +46,6 @@ testem.log
 Thumbs.db
 
 # views
-/views
+views
 /exp
 vcap-local*

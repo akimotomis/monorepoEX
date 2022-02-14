@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "nodemon  --exec ts-node src/index.ts",
     "clean": "rimraf dist/*",
+    "copy": "cpx \"./src/**/{*.html,*.css,*.js,*.txt,*.ico}\" dist && cpx vcap* dist",
     "tsc": "tsc",
-    "build": "npm-run-all  tsc",
+    "build": "npm-run-all clean tsc copy",
     "start": "npm run build && node ./dist/bin/www.js"
   },
   "keywords": [],
@@ -36,6 +37,7 @@
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.17",
     "@types/uuid": "^8.3.4",
+    "cpx": "^1.5.0",
     "nodemon": "^2.0.15",
     "rimraf": "^3.0.2",
     "ts-node": "^10.5.0",

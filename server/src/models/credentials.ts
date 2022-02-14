@@ -1,8 +1,8 @@
 // MemoApp – models\credentials.js (Cloudant版)
-
 // (a)使用モジュールの読み込み
-var cfenv = require('cfenv');
+import cfenv from 'cfenv';
 // 資格情報の取得
+// https://qiita.com/MahoTakara/items/842a6d3690015e720ff7#vcap-localjson
 // var services = JSON.parse(process.env.VCAP_SERVICES);
 // load local VCAP configuration  and service credentials
 var vcapLocal;
