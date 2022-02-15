@@ -19,6 +19,12 @@ const TASK_COLUMN_MINI: ListColumn[] = [
   { def: 'updatedAt', name: '更新日' },
   { def: 'delete', name: '削除' },
 ];
+const MEMO_COLUMN_MINI: ListColumn[] = [
+  { def: 'id', name: 'Task-id' },
+  { def: 'title', name: 'Title' },
+  { def: 'updatedAt', name: '更新日' },
+  { def: 'delete', name: '削除' },
+];
 
 export const TASK_COLUMN = {
   all: {
@@ -26,5 +32,10 @@ export const TASK_COLUMN = {
   },
   mini: {
     data: TASK_COLUMN_MINI,
+  },
+};
+export const MEMO_COLUMN = {
+  mini: {
+    data: MEMO_COLUMN_MINI,
   },
 };

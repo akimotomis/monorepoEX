@@ -2,6 +2,7 @@
 
 // (a)使用モジュールの読み込み
 import express = require('express');
+import cors = require('cors');
 import path = require('path');
 // var cors = require('cors');
 // var path = require('path');
@@ -15,6 +16,8 @@ import * as indexRouter from './routes/index';
 
 // (b)アプリケーションの作成
 const app = express();
+// Cross-origin resource sharing CORSポリシーによってブロック
+app.use(cors());
 
 // (c)ビューの設定
 app.set('views', path.join(__dirname, 'views'));

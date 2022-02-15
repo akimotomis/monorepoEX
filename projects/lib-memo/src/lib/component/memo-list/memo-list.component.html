@@ -1,0 +1,60 @@
+<p>list-common works!</p>
+<div class="mat-elevation-z8">
+  <table
+    mat-table
+    class="full-width-table"
+    [dataSource]="dataSource"
+    matSort
+    matSortDisableClear
+    aria-label="Elements"
+  >
+    <ng-container
+      *ngFor="let column of columDef; let first = first; let last = last"
+      [matColumnDef]="column.def"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ column.name }}
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <!-- {{ row[column.def] }} -->
+        <span *ngIf="column.def === 'title'">
+          <!-- <a [routerLink]="['/tasklist', row.id]"></a> -->
+          <a routerLink="/memodetail/{{ row.id }}"> {{ row[column.def] }}</a>
+        </span>
+        <span *ngIf="column.def !== 'title'">
+          {{ row[column.def] }}
+        </span>
+        <button
+          *ngIf="last"
+          mat-button
+          class="button fancy-button"
+          (click)="delete(row.id)"
+        >
+          <i class="material-icons">delete</i>
+        </button>
+      </td></ng-container
+    >
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+      class="header-row"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [class.element-row]="row.id !== selectedrow"
+      [class.select-row]="row.id === selectedrow"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="dataSource?.dataLength"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

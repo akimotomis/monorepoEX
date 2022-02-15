@@ -1,4 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ListControl } from './../model/memo';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -34,6 +35,14 @@ export class MemoService {
   public set EditId(value: any) {
     this.editId = value;
   }
+  public Share: ListControl = {
+    SelectedRow: 0,
+    PageIndex: 0,
+    PageSize: 10,
+    SortAactive: 'id',
+    SortDirection: 'asc',
+    Data: ([] = []),
+  };
 
   /**
    * RST-API 実行時に指定する URL
@@ -96,6 +105,13 @@ export class MemoService {
     );
   }
 
+  public getMemoList(): Observable<HttpResponse<any>> {
+    // return this.http.get(this.host + '/api', { observe: 'response' }).pipe(
+    return this.http.get(this.host + '/api', this.httpOptions).pipe(
+      tap((_) => this.log('getMemoList')),
+      catchError(this.handleError<any>('getMemoList'))
+    );
+  }
   /** IDによりメモを取得する */
   public getMemo(id: any): Observable<any> {
     return this.http.get(this.host + '/api/memos/' + id, this.httpOptions).pipe(
