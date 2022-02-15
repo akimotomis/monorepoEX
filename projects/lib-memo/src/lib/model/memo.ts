@@ -1,0 +1,13 @@
+export interface MemoListItem {
+  id: string;
+  title: string;
+  updatedAt: string;
+}
+export interface ListControl {
+  SelectedRow: any;
+  PageIndex: number;
+  PageSize: number;
+  SortAactive: string;
+  SortDirection: string;
+  Data: MemoListItem[];
+}
