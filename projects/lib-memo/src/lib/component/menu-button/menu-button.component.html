@@ -33,3 +33,6 @@
     </ng-container>
   </mat-menu>
 </mat-toolbar>
+<div class="spinner-container" *ngIf="migration.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>

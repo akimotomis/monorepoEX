@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon  --exec ts-node src/index.ts",
     "clean": "rimraf dist/*",
-    "copy": "cpx \"./src/**/{*.html,*.css,*.js,*.txt,*.ico}\" dist && cpx vcap* dist",
+    "copy": "cpx \"./src/**/{*.html,*.css,*.js,*.txt,*.ico}\" dist && cpx ./src/vcap* dist",
     "tsc": "tsc",
     "build": "npm-run-all clean tsc copy",
     "start": "npm run build && node ./dist/bin/www.js"

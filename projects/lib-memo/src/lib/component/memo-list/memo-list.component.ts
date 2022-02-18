@@ -1,4 +1,4 @@
-import { MemoDatasourceDirective } from '../../service/memo.datasource';
+import { MemoDatasource } from '../../service/memo.datasource';
 import { MemoService } from '../../service/memo.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,9 +14,7 @@ import { merge, tap } from 'rxjs';
 })
 export class MemoListComponent implements OnInit, AfterViewInit {
   // properties
-  public dataSource: MemoDatasourceDirective = new MemoDatasourceDirective(
-    this.memoService
-  );
+  public dataSource: MemoDatasource = new MemoDatasource(this.memoService);
   public columDef: any[] = MEMO_COLUMN.mini.data;
   public displayedColumns: string[] = MEMO_COLUMN.mini.data.map((v) => v.def);
   // ブラウザ戻りボタンに対応（選択行selectedrow）
@@ -38,7 +36,7 @@ export class MemoListComponent implements OnInit, AfterViewInit {
     console.log('ListCommonComponent:ngOnInit');
     // detailからの戻りの場合、編集対象のIDでListを復元する
     this.selectedrow = parseInt(this.memoService.Share.SelectedRow, 10);
-    if (this.selectedrow) {
+    if (this.memoService.Share.Data.length) {
       console.log('selectedrow::' + this.selectedrow);
       this.dataSource.dataLength = this.memoService.Share.Data.length;
       this.dataSource.getPage();

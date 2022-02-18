@@ -38,7 +38,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     console.log('TaskListComponent:ngOnInit');
     // detailからの戻りの場合、編集対象のIDでListを復元する
     this.selectedrow = parseInt(this.taskService.Share.SelectedRow, 10);
-    if (this.selectedrow) {
+    if (this.taskService.Share.Data.length) {
       console.log('selectedrow::' + this.selectedrow);
       this.dataSource.dataLength = this.taskService.Share.Data.length;
       this.dataSource.getPage();

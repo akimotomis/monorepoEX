@@ -18,6 +18,13 @@ import * as indexRouter from './routes/index';
 const app = express();
 // Cross-origin resource sharing CORSポリシーによってブロック
 app.use(cors());
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000', //アクセス許可するオリジン
+//     // credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
+//     optionsSuccessStatus: 200, //レスポンスstatusを200に設定
+//   })
+// );
 
 // (c)ビューの設定
 app.set('views', path.join(__dirname, 'views'));

@@ -5,10 +5,10 @@ import { TaskListItem } from '../model/task';
 import { TaskService } from './task.service';
 
 export class TaskDataSource implements DataSource<TaskListItem> {
-  public dataLength: number = 0;
-
   private subject = new BehaviorSubject<TaskListItem[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
+  // properties
+  public dataLength: number = 0;
   public loading$ = this.loadingSubject.asObservable();
 
   constructor(private taskServise: TaskService) {

@@ -1,27 +1,15 @@
-import { HttpResponse } from '@angular/common/http';
+// import { HttpResponse } from '@angular/common/http';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { catchError, finalize } from 'rxjs/operators';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { MemoListItem } from '../model/memo';
 import { MemoService } from './memo.service';
-import { Directive, Input } from '@angular/core';
 
-@Directive({
-  selector: '[libMemoDatasource]',
-})
-export class MemoDatasourceDirective implements DataSource<MemoListItem> {
-  // input
-  @Input()
-  selectedrow!: number;
-  @Input()
-  pageIndex!: number;
-  @Input()
-  pageSize!: number;
-  // properties
-  public dataLength: number = 0;
-
+export class MemoDatasource implements DataSource<MemoListItem> {
   private subject = new BehaviorSubject<MemoListItem[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
+  // properties
+  public dataLength: number = 0;
   public loading$ = this.loadingSubject.asObservable();
 
   constructor(private memoServise: MemoService) {
