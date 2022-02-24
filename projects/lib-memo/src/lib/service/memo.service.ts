@@ -54,7 +54,8 @@ export class MemoService {
   // Web APIのURL -
   // ビルド確認 -
   // private host = 'https://memo-apl.mybluemix.net';
-  private host = 'http://localhost:3000';
+  private host = 'https://memoapi.us-south.cf.appdomain.cloud';
+  // private host = 'http://localhost:3000';
 
   /**
    * コンストラクタ. MemoService のインスタンスを生成する　* Httpサービスを DI
