@@ -1,6 +1,12 @@
 import { MemoDatasource } from '../../service/memo.datasource';
 import { MemoService } from '../../service/memo.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +19,8 @@ import { merge, tap } from 'rxjs';
   styleUrls: ['./memo-list.component.scss'],
 })
 export class MemoListComponent implements OnInit, AfterViewInit {
+  @Input()
+  apiHost!: string;
   // properties
   public dataSource: MemoDatasource = new MemoDatasource(this.memoService);
   public columDef: any[] = MEMO_COLUMN.mini.data;
@@ -34,6 +42,7 @@ export class MemoListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     console.log('ListCommonComponent:ngOnInit');
+    this.memoService.host = this.apiHost;
     // detailからの戻りの場合、編集対象のIDでListを復元する
     this.selectedrow = parseInt(this.memoService.Share.SelectedRow, 10);
     if (this.memoService.Share.Data.length) {

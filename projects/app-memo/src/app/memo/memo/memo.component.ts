@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-memo',
@@ -6,10 +7,14 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
   styleUrls: ['./memo.component.scss'],
 })
 export class MemoComponent implements OnInit, AfterViewInit {
+  // properties
+  public apiHost: string = '';
+
   constructor() {}
 
   ngOnInit(): void {
-    console.log('MemoComponent:ngOnInit');
+    this.apiHost = environment.apihost;
+    console.log('MemoComponent:ngOnInit (apiHost)' + this.apiHost);
   }
 
   ngAfterViewInit(): void {

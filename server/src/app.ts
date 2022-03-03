@@ -1,13 +1,11 @@
 ﻿// MemoApp - app.js
 
 // (a)使用モジュールの読み込み
-import express = require('express');
-import cors = require('cors');
-import path = require('path');
-// var cors = require('cors');
-// var path = require('path');
-import logger = require('morgan');
-import bodyParser = require('body-parser');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import logger from 'morgan';
+import bodyParser from 'body-parser';
 import * as indexRouter from './routes/index';
 // import * as usersRouter from './routes/users';
 

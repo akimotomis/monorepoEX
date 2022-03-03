@@ -1,11 +1,12 @@
 // MemoApl - routes\index.js
 
 // (a)使用モジュールの読み込み
-import express = require('express');
-import luxon from 'luxon';
+import express from 'express';
 // var express = require('express');
-var uuid = require('uuid');
+import luxon from 'luxon';
 // var moment = require('moment-timezone');
+import uuid from 'uuid';
+// var uuid = require('uuid');
 var memo = require('../models/memo');
 // var package = require('../package.json');
 
@@ -163,5 +164,4 @@ router.delete(
   }
 );
 
-module.exports = router;
 export default router;
