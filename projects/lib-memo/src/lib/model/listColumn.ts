@@ -20,7 +20,7 @@ const TASK_COLUMN_MINI: ListColumn[] = [
   { def: 'delete', name: '削除' },
 ];
 const MEMO_COLUMN_MINI: ListColumn[] = [
-  { def: 'id', name: 'Task-id' },
+  { def: 'id', name: 'No' },
   { def: 'title', name: 'Title' },
   { def: 'updatedAt', name: '更新日' },
   { def: 'delete', name: '削除' },

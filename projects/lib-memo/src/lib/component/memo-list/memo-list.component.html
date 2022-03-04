@@ -11,19 +11,20 @@
     aria-label="Elements"
   >
     <ng-container
-      *ngFor="let column of columDef; let first = first; let last = last"
+      *ngFor="let column of columDef; last as last"
       [matColumnDef]="column.def"
     >
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ column.name }}
       </th>
-      <td mat-cell *matCellDef="let row">
-        <!-- {{ row[column.def] }} -->
-        <span *ngIf="column.def === 'title'">
-          <!-- <a [routerLink]="['/tasklist', row.id]"></a> -->
+      <td mat-cell *matCellDef="let row; index as i" [ngSwitch]="column.def">
+        <span *ngSwitchCase="'id'">
+          {{ i + 1 }}
+        </span>
+        <span *ngSwitchCase="'title'">
           <a routerLink="/memodetail/{{ row.id }}"> {{ row[column.def] }}</a>
         </span>
-        <span *ngIf="column.def !== 'title'">
+        <span *ngSwitchDefault>
           {{ row[column.def] }}
         </span>
         <button
