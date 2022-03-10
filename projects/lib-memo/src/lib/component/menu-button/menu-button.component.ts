@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { menuListItem, MENULISTITEM } from '../../model/menuListItem';
 import { MemoService } from '../../service/memo.service';
@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./menu-button.component.scss'],
 })
 export class MenuButtonComponent implements OnInit {
+  @Input() apiHost!: string;
   private loadingSubject = new BehaviorSubject<boolean>(false);
   // properties
   public mainMenuList: menuListItem[] = MENULISTITEM.main.data;
@@ -22,8 +23,10 @@ export class MenuButtonComponent implements OnInit {
     private memoServise: MemoService
   ) {}
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 環境変数をサービスに設定する
+    this.memoServise.host = this.apiHost;
+  }
 
   supportMethod(name: string): void {
     switch (name) {
@@ -39,6 +42,13 @@ export class MenuButtonComponent implements OnInit {
           this.memoServise.Share.Data.length
         ) {
           this.migration.memoToTask();
+        }
+
+        break;
+
+      case 'task_to_note':
+        if (this.taskServise.Share.Data.length) {
+          this.migration.taskToNote();
         }
 
         break;

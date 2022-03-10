@@ -1,15 +1,12 @@
-﻿// MemoApp – models\memo.js (Cloudant版)
+// (Cloudant版)
 
 // (a)使用モジュールの読み込み
-// import cradle from 'cradle';
 import cloudant from '../models/credentials';
-// var cloudant = require('../models/credentials');
 const cradle = require('cradle');
-// import { from } from 'rxjs';
 
 // Initialize database with cloudant
 //   CF service named 'cloudantNoSQLDB'
-const table = 'messageboard';
+const table = 'notebook';
 const host = cloudant.host;
 const port = cloudant.port;
 const options = {

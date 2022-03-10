@@ -3,15 +3,25 @@
 // (a)使用モジュールの読み込み
 import express from 'express';
 // var express = require('express');
-import luxon from 'luxon';
+// import luxon from 'luxon';
 // var moment = require('moment-timezone');
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 // var uuid = require('uuid');
-var memo = require('../models/memo');
-// var package = require('../package.json');
+var memo = require('../models/note');
 
 // (b)ルーターの作成
 var router = express.Router();
+
+interface noteRequest {
+  id: string;
+  title: string;
+  content: string;
+  status: string;
+  accessCount: number;
+  updateCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 // (1)メモ一覧
 router.get(
@@ -69,7 +79,7 @@ router.get(
 router.post(
   '/memos',
   function (
-    req: { body: { title: any; content: any } },
+    req: { body: noteRequest },
     res: {
       status: (arg0: number) => void;
       json: (arg0: {
@@ -81,14 +91,23 @@ router.post(
   ) {
     console.log('--router.post--/memos');
 
-    var id = uuid.v4();
-    var doc = {
-      title: req.body.title,
-      content: req.body.content,
-      updatedAt: luxon.DateTime.local()
-        .setZone('Asia/Tokyo')
-        .toFormat('YYYY/MM/DD HH:mm:ss'),
-    };
+    let id = v4();
+    let doc = {} as noteRequest;
+    doc.title = req.body.title;
+    doc.content = req.body.content;
+    doc.status = req.body.status;
+    doc.accessCount = 0;
+    doc.updateCount = 0;
+    doc.createdAt = req.body.createdAt;
+    doc.updatedAt = req.body.updatedAt;
+
+    // let doc = {
+    //   title: req.body.title,
+    //   content: req.body.content,
+    //   updatedAt: luxon.DateTime.local()
+    //     .setZone('Asia/Tokyo')
+    //     .toFormat('YYYY/MM/DD HH:mm:ss'),
+    // };
 
     memo.save(id, doc, function (_err: any) {
       res.status(200);
@@ -105,7 +124,7 @@ router.post(
 router.put(
   '/memos/:id([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})',
   function (
-    req: { params: { id: any }; body: { title: any; content: any } },
+    req: { params: { id: any }; body: noteRequest },
     res: {
       status: (arg0: number) => void;
       json: (arg0: {
@@ -115,16 +134,16 @@ router.put(
       }) => void;
     }
   ) {
-    console.log('--router.put--/memos/:id ', id);
+    console.log('--router.put--/memos/:id ', req.params.id);
 
-    var id = req.params.id;
-    var doc = {
-      title: req.body.title,
-      content: req.body.content,
-      updatedAt: luxon.DateTime.local()
-        .setZone('Asia/Tokyo')
-        .toFormat('YYYY/MM/DD HH:mm:ss'),
-    };
+    let id = req.params.id;
+    let doc = {} as noteRequest;
+    doc.title = req.body.title;
+    doc.content = req.body.content;
+    doc.status = req.body.status;
+    doc.accessCount = req.body.accessCount;
+    doc.updateCount = req.body.updateCount;
+    doc.updatedAt = req.body.updatedAt;
 
     memo.save(id, doc, function (_err: any) {
       res.status(200);

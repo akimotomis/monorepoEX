@@ -29,14 +29,6 @@ const MAINMENU_DATA: menuListItem[] = [
 const SUPPORTMENU_DATA: menuListItem[] = [
   {
     id: 1,
-    name: 'undefined',
-    icon: 'favorite',
-    link: '',
-    disabled: true,
-    color: 'green',
-  },
-  {
-    id: 2,
     name: 'reset_indexedDB',
     icon: 'clear_all',
     link: '',
@@ -44,9 +36,17 @@ const SUPPORTMENU_DATA: menuListItem[] = [
     color: 'green',
   },
   {
-    id: 3,
+    id: 2,
     name: 'memo_to_task',
     icon: 'loop',
+    link: '',
+    disabled: false,
+    color: 'green',
+  },
+  {
+    id: 3,
+    name: 'task_to_note',
+    icon: 'favorite',
     link: '',
     disabled: false,
     color: 'green',
