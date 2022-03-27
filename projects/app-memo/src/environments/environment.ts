@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  // apihost: 'http://localhost:3000',
-  apihost: 'https://memoapi.us-south.cf.appdomain.cloud',
+  apihost: 'http://localhost:3000', // notebook
+  // apihost: 'https://memo-apl.mybluemix.net', // JavaScript
+  // apihost: 'https://memoapi.us-south.cf.appdomain.cloud', // TypeScript
 };
 
 /*
