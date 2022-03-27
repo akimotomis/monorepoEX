@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apihost: 'http://localhost:3000',
+  // apihost: 'http://localhost:3000',
+  apihost: 'https://memoapi.us-south.cf.appdomain.cloud',
 };
 
 /*

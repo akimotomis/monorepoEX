@@ -73,66 +73,32 @@ export class MemoDatamigration {
   public memoToTask(): void {
     this.loadingSubject.next(true);
 
-    for (const iterator of this.memoServise.Share.Data) {
-      this.memoGet(iterator.id)
-        .pipe(
-          catchError(() => of([])),
-          finalize(() => {
-            // this.loadingSubject.next(false);
-            this.taskToDb();
-          })
-        )
-        .subscribe((content) => {
-          let addItem = {} as TaskListItem;
-          addItem.content = content;
-          addItem.title = iterator.title;
-          addItem.createdAt = iterator.updatedAt;
-          addItem.updatedAt = iterator.updatedAt;
-          this.taskServise.Share.Data.push(addItem);
-        });
-    }
-  }
-  private memoGet(id: any): Observable<any> {
-    return new Observable((observer: Observer<any>) => {
-      try {
-        this.memoServise.getMemo(id).subscribe();
-      } catch (error) {
-        observer.error(error);
-      }
-    });
-  }
-  private taskToDb(): void {
-    // this.loadingSubject.next(true);
-
-    for (const iterator of this.taskServise.Share.Data) {
-      this.taskAdd(iterator)
-        .pipe(
-          catchError(() => of([])),
-          finalize(() => {
-            this.taskServise.Share.Data = [];
-            this.loadingSubject.next(false);
-            this.loadingSubject.complete();
-          })
-        )
-        .subscribe();
-    }
-  }
-  private taskAdd(addItem: TaskListItem): Observable<any> {
-    return new Observable((observer: Observer<any>) => {
-      try {
-        this.taskServise
-          .post(addItem)
-          .pipe(take(1))
-          .subscribe((id) => {
-            observer.next(id);
-            if (this.memoServise.Share.Data.length === id) {
-              // this.loadingSubject.complete();
-              observer.complete();
-            }
+    const interval$ = interval(1000); // 1.0sずつカウントアップ
+    interval$
+      .pipe(
+        take(this.memoServise.Share.Data.length), //指定回数実行
+        finalize(() => {
+          //ストリームが流れた最後に非表示
+          this.loadingSubject.next(false);
+          this.loadingSubject.complete();
+        })
+      )
+      .subscribe((value) => {
+        console.log(value);
+        this.memoServise
+          .getMemo(this.memoServise.Share.Data[value].id)
+          .subscribe((memo) => {
+            let addItem = {} as TaskListItem;
+            addItem.content = memo.message.doc.content;
+            addItem.title = this.memoServise.Share.Data[value].title;
+            addItem.createdAt = this.memoServise.Share.Data[value].updatedAt;
+            addItem.updatedAt = this.memoServise.Share.Data[value].updatedAt;
+            this.taskServise.Share.Data.push(addItem);
+            this.taskServise.post(addItem).subscribe((id) => {
+              addItem.id = id;
+              this.taskServise.Share.Data.push(addItem);
+            });
           });
-      } catch (error) {
-        observer.error(error);
-      }
-    });
+      });
   }
 }

@@ -70,7 +70,13 @@ export class TaskFormComponent implements OnInit {
   save(): void {
     this.task = this.editForm.value;
     this.task.updatedAt = new Date().toLocaleString();
-
+    // 一時Dataの更新
+    this.taskService.Share.Data.map((v) => {
+      if (v.id === this.task.id) {
+        v.updatedAt = this.task.updatedAt;
+      }
+    });
+    // DB更新
     this.taskService.put(this.task).subscribe(() => {
       console.log(
         'Observer update complete id=' + this.taskService.Share.SelectedRow
