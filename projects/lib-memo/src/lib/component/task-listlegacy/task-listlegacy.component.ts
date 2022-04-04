@@ -56,7 +56,7 @@ export class TaskListlegacyComponent implements OnInit, AfterViewInit {
         tap(() => {
           // List復元用のpaginator設定値を退避する
           if (this.sort.active) {
-            this.taskService.Share.SortAactive = this.sort.active;
+            this.taskService.Share.SortActive = this.sort.active;
             this.taskService.Share.SortDirection = this.sort.direction;
           }
           if (this.paginator.page) {

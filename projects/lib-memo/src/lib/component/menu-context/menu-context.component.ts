@@ -24,7 +24,7 @@ export class MenuContextComponent implements OnInit {
   contextMenuPosition = { x: '0px', y: '0px' };
   public saveMenuList: menuListItem[] = MENULISTITEM.save.data;
 
-  constructor(private taskServise: TaskService) {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     console.log('saveMenuList:ngOnInit');

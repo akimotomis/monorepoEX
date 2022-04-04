@@ -12,7 +12,7 @@ export class TaskService {
   private db: Subject<IDBDatabase> = new ReplaySubject<IDBDatabase>(1);
 
   private dbSettings = {
-    name: 'todos-vue',
+    name: 'task',
     version: 1,
   };
   private storeSettings = {
@@ -20,9 +20,12 @@ export class TaskService {
     storeOptions: { keyPath: 'id', autoIncrement: true },
     indexes: [
       // { indexName: 'comment', unique: false },
+      { indexName: 'category', unique: false },
       { indexName: 'status', unique: false },
       { indexName: 'title', unique: false },
       { indexName: 'content', unique: false },
+      { indexName: 'accessCount', unique: false },
+      { indexName: 'updateCount', unique: false },
       { indexName: 'createdAt', unique: false },
       { indexName: 'updatedAt', unique: false },
     ],
@@ -36,7 +39,7 @@ export class TaskService {
     SelectedRow: 0,
     PageIndex: 0,
     PageSize: 10,
-    SortAactive: 'id',
+    SortActive: 'id',
     SortDirection: 'asc',
     Data: ([] = []),
   };

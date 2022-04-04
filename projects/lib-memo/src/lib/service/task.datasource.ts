@@ -11,7 +11,7 @@ export class TaskDataSource implements DataSource<TaskListItem> {
   public dataLength: number = 0;
   public loading$ = this.loadingSubject.asObservable();
 
-  constructor(private taskServise: TaskService) {
+  constructor(private taskService: TaskService) {
     // super();
   }
 
@@ -32,14 +32,14 @@ export class TaskDataSource implements DataSource<TaskListItem> {
   load(): void {
     this.loadingSubject.next(true);
 
-    this.taskServise
+    this.taskService
       .get()
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))
       )
       .subscribe((tasks) => {
-        this.dataLength = this.taskServise.Share.Data.length;
+        this.dataLength = this.taskService.Share.Data.length;
         this.getPage();
       });
   }
@@ -56,11 +56,11 @@ export class TaskDataSource implements DataSource<TaskListItem> {
     addItem.createdAt = new Date().toLocaleString();
     addItem.updatedAt = addItem.createdAt;
 
-    this.taskServise.post(addItem).subscribe((id) => {
+    this.taskService.post(addItem).subscribe((id) => {
       addItem.id = id;
       // this.data.push(addItem)
-      this.taskServise.Share.Data.push(addItem);
-      this.dataLength = this.taskServise.Share.Data.length;
+      this.taskService.Share.Data.push(addItem);
+      this.dataLength = this.taskService.Share.Data.length;
       this.getPage();
     });
   }
@@ -72,11 +72,11 @@ export class TaskDataSource implements DataSource<TaskListItem> {
    * @memberof TaskListDataSource
    */
   del(id: number): void {
-    this.taskServise.delete(id).subscribe((v) => {
-      this.taskServise.Share.Data = this.taskServise.Share.Data.filter(
+    this.taskService.delete(id).subscribe((v) => {
+      this.taskService.Share.Data = this.taskService.Share.Data.filter(
         (v) => v.id !== id
       );
-      this.dataLength = this.taskServise.Share.Data.length;
+      this.dataLength = this.taskService.Share.Data.length;
       this.getPage();
     });
   }
@@ -87,23 +87,24 @@ export class TaskDataSource implements DataSource<TaskListItem> {
    * @memberof TaskListDataSource
    */
   resetDB(): void {
-    this.taskServise.deleteDB().subscribe();
+    this.taskService.deleteDB().subscribe();
   }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
+   * [...data]"Three-dots" 配列（配列のシャローコピー、ES6）
    */
   public getPage(): void {
     this.subject.next(
-      this.getPagedData(this.getSortedData([...this.taskServise.Share.Data]))
+      this.getPagedData(this.getSortedData([...this.taskService.Share.Data]))
     );
   }
 
   private getPagedData(data: TaskListItem[]): TaskListItem[] {
     const startIndex =
-      this.taskServise.Share.PageIndex * this.taskServise.Share.PageSize;
-    return data.splice(startIndex, this.taskServise.Share.PageSize);
+      this.taskService.Share.PageIndex * this.taskService.Share.PageSize;
+    return data.splice(startIndex, this.taskService.Share.PageSize);
   }
   /**
    * Sort the data (client-side). If you're using server-side sorting,
@@ -112,8 +113,8 @@ export class TaskDataSource implements DataSource<TaskListItem> {
   private getSortedData(data: TaskListItem[]): TaskListItem[] {
     // return data;
     return data.sort((a, b) => {
-      const isAsc = this.taskServise.Share.SortDirection === 'asc';
-      switch (this.taskServise.Share.SortAactive) {
+      const isAsc = this.taskService.Share.SortDirection === 'asc';
+      switch (this.taskService.Share.SortActive) {
         case 'updatedAt':
           return compare(a.updatedAt, b.updatedAt, isAsc);
         case 'createdAt':

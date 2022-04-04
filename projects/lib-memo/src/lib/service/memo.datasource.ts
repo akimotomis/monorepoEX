@@ -12,7 +12,7 @@ export class MemoDatasource implements DataSource<MemoListItem> {
   public dataLength: number = 0;
   public loading$ = this.loadingSubject.asObservable();
 
-  constructor(private memoServise: MemoService) {
+  constructor(private memoService: MemoService) {
     // super();
   }
 
@@ -27,7 +27,7 @@ export class MemoDatasource implements DataSource<MemoListItem> {
   load(): void {
     this.loadingSubject.next(true);
 
-    this.memoServise
+    this.memoService
       .getMemoList()
       .pipe(
         catchError(() => of([])),
@@ -36,9 +36,9 @@ export class MemoDatasource implements DataSource<MemoListItem> {
       .subscribe((res: any) => {
         // const response: any = res(body);
         const list = res.message.list;
-        this.memoServise.Share.Data = list.map((x: { value: any }) => x.value);
-        // this.memoServise.Share.Data = res.body;
-        this.dataLength = this.memoServise.Share.Data.length;
+        this.memoService.Share.Data = list.map((x: { value: any }) => x.value);
+        // this.memoService.Share.Data = res.body;
+        this.dataLength = this.memoService.Share.Data.length;
         this.getPage();
       });
   }
@@ -48,14 +48,14 @@ export class MemoDatasource implements DataSource<MemoListItem> {
    */
   public getPage(): void {
     this.subject.next(
-      this.getPagedData(this.getSortedData([...this.memoServise.Share.Data]))
+      this.getPagedData(this.getSortedData([...this.memoService.Share.Data]))
     );
   }
 
   private getPagedData(data: MemoListItem[]): MemoListItem[] {
     const startIndex =
-      this.memoServise.Share.PageIndex * this.memoServise.Share.PageSize;
-    return data.splice(startIndex, this.memoServise.Share.PageSize);
+      this.memoService.Share.PageIndex * this.memoService.Share.PageSize;
+    return data.splice(startIndex, this.memoService.Share.PageSize);
   }
   /**
    * Sort the data (client-side). If you're using server-side sorting,
@@ -64,8 +64,8 @@ export class MemoDatasource implements DataSource<MemoListItem> {
   private getSortedData(data: MemoListItem[]): MemoListItem[] {
     // return data;
     return data.sort((a, b) => {
-      const isAsc = this.memoServise.Share.SortDirection === 'asc';
-      switch (this.memoServise.Share.SortAactive) {
+      const isAsc = this.memoService.Share.SortDirection === 'asc';
+      switch (this.memoService.Share.SortActive) {
         case 'updatedAt':
           return compare(a.updatedAt, b.updatedAt, isAsc);
         case 'title':

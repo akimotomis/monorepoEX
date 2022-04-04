@@ -7,6 +7,7 @@ import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import * as indexRouter from './routes/index';
+import * as indexnoteRouter from './routes/indexnote';
 // import * as usersRouter from './routes/users';
 
 // global
@@ -37,6 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 // (e)ルーティングの設定
 // app.use('/api/dbman', usersRouter.default);
 app.use('/api/', indexRouter.default);
+app.use('/api/note/', indexnoteRouter.default);
 
 //app.use('/', routes);
 //app.use(express.static(path.join(__dirname, './bin')));

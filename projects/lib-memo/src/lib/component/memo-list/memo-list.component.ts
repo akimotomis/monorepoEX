@@ -66,7 +66,7 @@ export class MemoListComponent implements OnInit, AfterViewInit {
         tap(() => {
           // List復元用のpaginator設定値を退避する
           if (this.sort.active) {
-            this.memoService.Share.SortAactive = this.sort.active;
+            this.memoService.Share.SortActive = this.sort.active;
             this.memoService.Share.SortDirection = this.sort.direction;
           }
           if (this.paginator.page) {

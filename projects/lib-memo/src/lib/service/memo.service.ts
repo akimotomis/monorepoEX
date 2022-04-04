@@ -1,8 +1,8 @@
-import { ListControl } from './../model/memo';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { ListControl } from './../model/memo';
 
 @Injectable({ providedIn: 'root' })
 export class MemoService {
@@ -39,8 +39,8 @@ export class MemoService {
     SelectedRow: 0,
     PageIndex: 0,
     PageSize: 10,
-    SortAactive: 'id',
-    SortDirection: 'asc',
+    SortActive: 'updatedAt',
+    SortDirection: 'desc',
     Data: ([] = []),
   };
 

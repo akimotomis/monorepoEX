@@ -7,7 +7,7 @@ export interface ListControl {
   SelectedRow: any;
   PageIndex: number;
   PageSize: number;
-  SortAactive: string;
+  SortActive: string;
   SortDirection: string;
   Data: MemoListItem[];
 }

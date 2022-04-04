@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon  --exec ts-node src/index.ts",
+    "dev": "nodemon  --exec ts-node src/bin/www.ts",
     "clean": "rimraf dist/*",
     "copy": "cpx \"./src/**/{*.html,*.css,*.js,*.txt,*.ico}\" dist && cpx ./src/vcap* dist",
     "tsc": "tsc",
